@@ -1,11 +1,16 @@
 hex_colors = {
 
-    "borda": "#3b3b3b",
+    "COLOR_1": "#d9811e",
+    "TEXT_BUTTON_LIGHT": "#000000",
+    "BUTTON_1": "#dfdfdf",
+    "BACKGROUND": "#dfdfdf",
 
-    "color_1": "#009fb6",
-    "color_2": "#ffce3f",
-    "color_3": "#06304b",
-    "": "",
+    "FRAME_1_DARK": "#2b2b42",
+    "TEXT_BUTTON_DARK": "#1c1c44",
+    "BUTTON_DARK": "#292929",
+    "BACKGROUND_DARK": "#292929"
+
+
 }
 
 custom_size = {

@@ -1,8 +1,24 @@
 import sqlite3
 from tkinter import *
+from config import hex_colors
 
 
 class Functionalities():
+
+    def light_mode(self):
+        print("LIGHT MODE")
+        self.BACKGROUND = hex_colors['BACKGROUND']
+        self.BUTTON_COLOR = hex_colors['BUTTON_1']
+        self.FRAME_1_COLOR = hex_colors['COLOR_1']
+        self.TEXT_BUTTON = hex_colors['TEXT_BUTTON_LIGHT']
+
+    def dark_mode(self):
+        print("DARK MODE")
+        self.BACKGROUND = hex_colors['BACKGROUND_DARK']
+        self.BUTTON_COLOR = hex_colors['BUTTON_DARK']
+        self.FRAME_1_COLOR = hex_colors['FRAME_1_DARK']
+        self.TEXT_BUTTON = hex_colors['TEXT_BUTTON_DARK']
+
 
     def clean_screen_login(self):
         self.entry_account.delete(0, END)
