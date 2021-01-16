@@ -11,6 +11,7 @@ class Functionalities():
         self.BUTTON_COLOR = hex_colors['BUTTON_1']
         self.FRAME_1_COLOR = hex_colors['COLOR_1']
         self.TEXT_BUTTON = hex_colors['TEXT_BUTTON_LIGHT']
+        self.LABEL_COLOR_TEXT = hex_colors['LABEL_TEXT_COLOR_LIGHT']
 
     def dark_mode(self):
         print("DARK MODE")
@@ -18,6 +19,7 @@ class Functionalities():
         self.BUTTON_COLOR = hex_colors['BUTTON_DARK']
         self.FRAME_1_COLOR = hex_colors['FRAME_1_DARK']
         self.TEXT_BUTTON = hex_colors['TEXT_BUTTON_DARK']
+        self.LABEL_COLOR_TEXT = hex_colors['LABEL_TEXT_COLOR_DARK']
 
 
     def clean_screen_login(self):

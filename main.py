@@ -28,7 +28,8 @@ screensize = f"{user32.GetSystemMetrics(0)}x{user32.GetSystemMetrics(1)}"
 get_user_width = user32.GetSystemMetrics(0)
 get_user_height = user32.GetSystemMetrics(1)
 
-#splash_root = Tk()
+
+# splash_root = Tk()
 
 
 class WindowLoop(Functionalities, Reports_pdf, tk.Tk):
@@ -36,8 +37,8 @@ class WindowLoop(Functionalities, Reports_pdf, tk.Tk):
         tk.Tk.__init__(self)
         self.withdraw()
         splash = SplashLoop(self)
-        #init_screen = Tk()
-        #self.window = init_screen
+        # init_screen = Tk()
+        # self.window = init_screen
         self.screen()
         self.screen_frames()
         self.widgets_frame_1()
@@ -51,6 +52,27 @@ class WindowLoop(Functionalities, Reports_pdf, tk.Tk):
         ## show window again
         self.deiconify()
 
+    def switch(self):
+
+        self.btnState = False
+
+        if self.btnState:  # off
+            self.btn.config(image=self.offImg, bg='#CECCBE', activebackground="#CECCBE")
+            self.light_mode()
+            self.configure(background=self.BACKGROUND)
+            self.screen_frames()
+            self.btnState = False
+        else:  # on
+            self.btn.config(image=self.onImg, bg='#2B2B2B', activebackground="#2B2B2B")
+            self.dark_mode()
+            self.img = ImageTk.PhotoImage(Image.open("img/consuela_logo_dark.png"))
+            self.configure(background=self.BACKGROUND)
+            self.screen_frames()
+            self.widgets_frame_1()
+            self.frame_2_list()
+            self.btnState = True
+
+
     def screen(self):
         w = self.winfo_reqwidth()
         print(w)
@@ -60,14 +82,13 @@ class WindowLoop(Functionalities, Reports_pdf, tk.Tk):
         print(ws)
         hs = self.winfo_screenheight()
         print(hs)
-        x = (ws /2) - (w / 2) - 600
+        x = (ws / 2) - (w / 2) - 600
         y = (hs / 2) - (h / 2) - 300
-        print(x,y)
-
+        print(x, y)
+        # BUTTON SWITCH DARK OR LIGHT
         self.light_mode()
         self.PC_NAME = socket.gethostname()
         self.title(f"Consuela - Welcome {self.PC_NAME}")
-        self.configure(background=self.BACKGROUND)
         self.geometry(f"{custom_size['init_width']}x{custom_size['init_height']}")
         self.geometry('+%d+%d' % (x, y))
         self.resizable(True, True)
@@ -75,6 +96,8 @@ class WindowLoop(Functionalities, Reports_pdf, tk.Tk):
         self.minsize(width=custom_size['min_width'], height=custom_size['min_height'])
         self.iconbitmap('img/favicon.ico')
         self.img = ImageTk.PhotoImage(Image.open("img/consuela_logo_light.png"))
+        self.onImg = ImageTk.PhotoImage(Image.open("img/on.png"))
+        self.offImg = ImageTk.PhotoImage(Image.open("img/off.png"))
 
     def screen_frames(self):
         self.frame_1 = Frame(self)
@@ -87,6 +110,11 @@ class WindowLoop(Functionalities, Reports_pdf, tk.Tk):
 
     def widgets_frame_1(self):
         # =========== BUTTON ================
+        # BUTTON SWITCH DARK OR LIGHT
+
+        self.btn = Button(self.frame_1, text='Dark Mode', borderwidth=0, command=self.switch)
+        self.btn.place(relx=0.1, rely=0.1, anchor="center")
+        # ===============
         # entrar
 
         self.btn_enter = Button(self.frame_1, text="Salvar", fg=self.TEXT_BUTTON, bd=2, bg=self.BUTTON_COLOR,
@@ -95,37 +123,37 @@ class WindowLoop(Functionalities, Reports_pdf, tk.Tk):
         self.btn_enter.place(relx=0.1, rely=0.830, relwidth=0.30, relheight=0.050)
 
         # limpar
-        self.btn_clear = Button(self.frame_1, text="Limpar", bd=2, font=('consolas', 12, 'bold'),
+        self.btn_clear = Button(self.frame_1, text="Limpar", fg=self.TEXT_BUTTON, bg=self.BUTTON_COLOR, bd=2, font=('consolas', 12, 'bold'),
                                 command=self.clean_screen_login)
         self.btn_clear.place(relx=0.1, rely=0.900, relwidth=0.30, relheight=0.050)
 
         # apagar
-        self.btn_erase = Button(self.frame_1, text="Apagar", bd=2, font=('consolas', 12, 'bold'),
+        self.btn_erase = Button(self.frame_1, text="Apagar", fg=self.TEXT_BUTTON, bg=self.BUTTON_COLOR, bd=2, font=('consolas', 12, 'bold'),
                                 command=self.delet_login)
         self.btn_erase.place(relx=0.5, rely=0.830, relwidth=0.30, relheight=0.050)
 
         # alterar
-        self.btn_edit = Button(self.frame_1, text="Editar", bd=2, font=('consolas', 12, 'bold'),
+        self.btn_edit = Button(self.frame_1, text="Editar", fg=self.TEXT_BUTTON, bg=self.BUTTON_COLOR, bd=2, font=('consolas', 12, 'bold'),
                                command=self.edit_client)
         self.btn_edit.place(relx=0.1, rely=0.900, relwidth=0.30, relheight=0.050)
 
         # ========= LABELS  ============
-        # self.panel = Label(self.frame_1, image=self.img)
-        # self.panel.pack(side="bottom", fill="both", expand="yes")
-        # self.panel.place(relx=0.25, rely=0.1, width=200, height=190)
+        self.panel = Label(self.frame_1, image=self.img)
+        self.panel.pack(side="bottom", fill="both", expand="yes")
+        self.panel.place(relx=0.25, rely=0.1, width=197, height=190)
 
-        self.label_credits = Label(self.frame_1, text="Por Caio Madeira", bg=self.FRAME_1_COLOR,
+        self.label_credits = Label(self.frame_1, text="Por Caio Madeira", bg=self.FRAME_1_COLOR, fg=self.LABEL_COLOR_TEXT,
                                    font=('helvetica', 7, 'bold'))
         self.label_credits.place(x=10, y=5, width=100, height=20)
 
-        self.label_account = Label(self.frame_1, text="Conta:", bg=self.FRAME_1_COLOR, font=('consolas', 15, 'bold'))
+        self.label_account = Label(self.frame_1, text="Conta:", bg=self.FRAME_1_COLOR,fg=self.LABEL_COLOR_TEXT, font=('consolas', 15, 'bold'))
         self.label_account.place(relx=0.01, rely=0.40, relwidth=0.45, relheight=0.05)
 
-        self.label_user = Label(self.frame_1, text="Usuário/E-mail:", bg=self.FRAME_1_COLOR,
+        self.label_user = Label(self.frame_1, text="Usuário/E-mail:", bg=self.FRAME_1_COLOR, fg=self.LABEL_COLOR_TEXT,
                                 font=('consolas', 12, 'bold'))
         self.label_user.place(relx=0.10, rely=0.50, relwidth=0.45, relheight=0.05)
 
-        self.label_pass = Label(self.frame_1, text="Senha:", bg=self.FRAME_1_COLOR, font=('consolas', 15, 'bold'))
+        self.label_pass = Label(self.frame_1, text="Senha:", bg=self.FRAME_1_COLOR, fg=self.LABEL_COLOR_TEXT, font=('consolas', 15, 'bold'))
         self.label_pass.place(relx=0.01, rely=0.60, relwidth=0.45, relheight=0.05)
         # ========= ENTRYS  ============
 
@@ -160,7 +188,7 @@ class WindowLoop(Functionalities, Reports_pdf, tk.Tk):
 
         # ==== BOTAO BUSCAR
 
-        self.btn_search = Button(self.frame_2, text="Buscar", bd=2, font=('consolas', 12, 'bold'),
+        self.btn_search = Button(self.frame_2, text="Buscar", fg=self.TEXT_BUTTON, bg=self.BUTTON_COLOR, bd=2, font=('consolas', 12, 'bold'),
                                  command=self.search_logins)
         self.btn_search.place(relx=0.01, rely=0.01, relwidth=0.1, relheight=0.050)
 
