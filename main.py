@@ -57,11 +57,14 @@ class WindowLoop(Functionalities, Reports_pdf, tk.Tk):
         self.btnState = False
 
         if self.btnState:  # off
-            self.btn.config(image=self.offImg, bg='#CECCBE', activebackground="#CECCBE")
-            self.light_mode()
+            self.btn.config(image=self.onImg, bg='#2B2B2B', activebackground="#2B2B2B")
+            self.dark_mode()
+            self.img = ImageTk.PhotoImage(Image.open("img/consuela_logo_dark.png"))
             self.configure(background=self.BACKGROUND)
             self.screen_frames()
-            self.btnState = False
+            self.widgets_frame_1()
+            self.frame_2_list()
+            self.btnState = True
         else:  # on
             self.btn.config(image=self.onImg, bg='#2B2B2B', activebackground="#2B2B2B")
             self.dark_mode()
@@ -113,7 +116,7 @@ class WindowLoop(Functionalities, Reports_pdf, tk.Tk):
         # BUTTON SWITCH DARK OR LIGHT
 
         self.btn = Button(self.frame_1, text='Dark Mode', borderwidth=0, command=self.switch)
-        self.btn.place(relx=0.1, rely=0.1, anchor="center")
+        self.btn.place(relx=0.9, rely=0.03, anchor="center")
         # ===============
         # entrar
 
